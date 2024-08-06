@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    
+    header {
+      background-color: rgb(51, 255, 0);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 20px;
+    }
+    
+    h1 {
+      margin: 0;
+    }
+    
+    section {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #d444d4;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgb(0, 221, 255);
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    label {
+      font-size: 30px;
+      margin-bottom: 0;
+    }
+    
+    input,
+    textarea {
+      width: 90%;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 3px solid #6aff00;
+      border-radius: 5px;
+    }
+    
+    button {
+      background-color: rgb(255, 128, 0);
+      color: #000000;
+      padding: 10px 60px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    @media screen and (max-width: 480px) {
+      section {
+        max-width: 280px;
+      }
+    }
+  </style>
+
+  <header>
+    <h1>Update Student Details</h1>
+  </header>
+
+  <section>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label>Student Name:</label>
+      <input type="text" name="recipe_name" value="{{ recipes.recipe_name }}" required />
+
+      <label>Student Description:</label>
+      <textarea name="recipe_description" required>{{ recipes.recipe_description }}</textarea>
+
+      <label>Student Image:</label>
+      <input type="file" name="recipe_image" />
+
+      <button type="submit">Update Student</button>
+    </form>
+  </section>
+{% endblock %}

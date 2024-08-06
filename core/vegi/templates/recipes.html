@@ -1,0 +1,413 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    
+    header {
+      height: 51px;
+      background-color: blue;
+      border: 2px solid rgb(0, 0, 0);
+      animation: slideInNav 1s ease-out;
+    }
+    
+    @keyframes slideInNav {
+      from {
+        transform: translateX(-100%);
+      }
+    
+      to {
+        transform: translateX(0);
+      }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    nav ul {
+      height: 15px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      margin-left: 0;
+    }
+    
+    nav ul li {
+      font-size: larger;
+      padding: 0 20px;
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-start;
+      color: white;
+      text-decoration: none;
+      margin: 0;
+    }
+    
+    nav ul li:hover {
+      color: rgb(8, 11, 18);
+      font-weight: bold;
+    }
+    
+    nav .search {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+    }
+    
+    nav .search input {
+      width: 25vw;
+      height: 30px;
+      padding: 2px 27px;
+      border: 2px solid black;
+      border-radius: 25px;
+      margin: 5px 0px 2px 47em;
+    }
+    
+    nav .btn-success {
+      background-color: rgb(255, 0, 0);
+      color: #fff;
+      padding: 8px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    
+    nav .logout-btn {
+      margin-right: 1em;
+    }
+    
+    nav .logout-btn :hover {
+      background-color: rgb(255, 0, 0);
+      color: rgb(8, 11, 18);
+      font-weight: bold;
+    }
+    
+    main {
+      background-color: rgb(255, 92, 92);
+      color: cyan;
+      text-align: center;
+      padding: 30px;
+      animation: fadeInMain 2s ease-in-out;
+    }
+    
+    @keyframes fadeInMain {
+      from {
+        opacity: 0;
+      }
+    
+      to {
+        opacity: 1;
+      }
+    }
+    
+    h1 {
+      margin: 0;
+    }
+    
+    section {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #d444d4;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgb(0, 221, 255);
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    label {
+      font-size: 30px;
+      margin-bottom: 0;
+    }
+    
+    input,
+    textarea {
+      width: 90%;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 3px solid #6aff00;
+      border-radius: 5px;
+    }
+    
+    button {
+      background-color: rgb(255, 128, 0);
+      color: #000000;
+      padding: 10px 60px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .search-section {
+      text-align: center;
+      margin: 0;
+    }
+    
+    .search {
+      width: 100%;
+    }
+    
+    .search-section label {
+      font-size: 26px;
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .search-section input[type='text'] {
+      width: 30%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 3px solid #000000;
+      border-radius: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .search-section button {
+      background-color: rgb(255, 0, 174);
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .search-section button:hover {
+      background-color: rgb(200, 0, 140);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 1px;
+    }
+    
+    th,
+    td {
+      border: 3px solid #000000;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #feda77;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .btn-danger {
+      background-color: red;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    
+    .btn-success {
+      background-color: green;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 1px;
+      background-color: rgb(255, 92, 92);
+      color: #000000;
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    @media screen and (max-width: 768px) {
+      nav ul {
+        justify-content: space-around;
+      }
+    
+      nav .search input {
+        width: 100%;
+        margin: 5px 10px 2px 10px;
+      }
+    
+      nav .logout-btn {
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+    
+      main {
+        padding: 15px;
+      }
+    
+      section {
+        max-width: 50%;
+        margin: 15px auto;
+      }
+    
+      input,
+      textarea {
+        width: 100%;
+        padding: 5px;
+      }
+    
+      .search-section input[type='text'] {
+        width: 40%;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      nav ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        font-size: 10px;
+      }
+    
+      nav ul li {
+        padding: 5px;
+      }
+    
+      nav .search input {
+        width: 1.5cm;
+        margin: 6px auto 2px 0;
+        font-size: 10px;
+      }
+    
+      nav .logout-btn {
+        margin-top: 5px;
+        font-size: 12px;
+        padding: auto auto;
+      }
+    
+      section {
+        max-width: 70%;
+        margin: 15px auto;
+      }
+    
+      button {
+        padding: 10px 40px;
+        font-size: 15px;
+      }
+    
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 1px;
+      }
+    
+      th,
+      td {
+        font-size: 10px;
+        padding: 2px;
+        text-align: center;
+        border: 3px solid #000000;
+      }
+    }
+  </style>
+
+  <header>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+
+      <div class="search">
+        <input type="text" placeholder="Search here" />
+      </div>
+
+      <div class="logout-btn">
+        <a href="/logout" class="btn btn-success">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Student Details</h1>
+  </main>
+
+  <section>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label>Student Name:</label>
+      <input type="text" name="recipe_name" required />
+
+      <label>Student Description:</label>
+      <textarea name="recipe_description" required></textarea>
+
+      <label>Student Image:</label>
+      <input type="file" name="recipe_image" />
+
+      <button type="submit">Add Student</button>
+    </form>
+  </section>
+  <hr />
+
+  <div class="search-section">
+    <form>
+      <div class="search">
+        <label>Search Student</label>
+        <input type="text" name="search_recipe" />
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <hr />
+
+  <table>
+    <tr>
+      <th>Sr.no.</th>
+      <th>Student Name</th>
+      <th>Student Description</th>
+      <th>Student Image</th>
+      <th>Actions</th>
+    </tr>
+
+    {% for recipe in recipes %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ recipe.recipe_name }}</td>
+        <td>{{ recipe.recipe_description }}</td>
+        <td>
+          <img src="/media/{{ recipe.recipe_image }}" width="100" height="100" />
+        </td>
+        <td>
+          <a href="delete-recipe{{ recipe.id }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this recipe?')">Delete</a><br /><br />
+          <a href="update-recipe{{ recipe.id }}" class="btn btn-success">Edit</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <footer>
+    <p>
+      <b>&copy; 2024 IIIT PUNE @copyright</b>
+    </p>
+  </footer>
+{% endblock %}

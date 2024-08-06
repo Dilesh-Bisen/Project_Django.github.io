@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+    
+    header {
+      height: 51px;
+      background-color: blue;
+      border: 2px solid rgb(0, 0, 0);
+      animation: slideInNav 1s ease-out;
+    }
+    
+    @keyframes slideInNav {
+      from {
+        transform: translateX(-100%);
+      }
+    
+      to {
+        transform: translateX(0);
+      }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    nav ul,
+    nav a {
+      height: 15px;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      margin-left: 0;
+      text-decoration: none;
+      color: white;
+    }
+    
+    nav ul li {
+      font-size: larger;
+      padding: 0 20px;
+      list-style-type: none;
+      display: flex;
+      justify-content: flex-start;
+      color: white;
+      margin: 0;
+    }
+    
+    nav ul li:hover {
+      color: rgb(8, 11, 18);
+      font-weight: bold;
+    }
+    
+    nav ul li a:hover {
+      color: rgb(0, 255, 0);
+      font-weight: bolder;
+    }
+    
+    nav div a:hover {
+      color: rgb(8, 11, 18);
+      font-weight: bold;
+    }
+    
+    nav .search {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+    }
+    
+    nav .search input {
+      width: 25vw;
+      height: 30px;
+      padding: 2px 27px;
+      border: 2px solid black;
+      border-radius: 25px;
+      margin: 5px 0px 2px 47em;
+    }
+    
+    nav .btn-success {
+      background-color: rgb(255, 0, 0);
+      color: #fff;
+      padding: 8px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    
+    nav .logout-btn {
+      margin-right: 1em;
+    }
+    
+    nav .logout-btn:hover {
+      background-color: rgb(255, 0, 0);
+      color: rgb(8, 11, 18);
+      font-weight: bold;
+    }
+    
+    main {
+      background-color: rgb(255, 92, 92);
+      color: cyan;
+      padding: 30px;
+      animation: fadeInMain 2s ease-in-out;
+    }
+    
+    @keyframes fadeInMain {
+      from {
+        opacity: 0;
+      }
+    
+      to {
+        opacity: 1;
+      }
+    }
+    
+    h1 {
+      margin: 0;
+      text-align: center;
+      padding-bottom: 15px;
+    }
+    
+    .rank-total {
+      background-color: greenyellow;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    h4 {
+      color: black;
+      margin: 10px 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto 0 auto;
+    }
+    
+    th,
+    td {
+      border: 3px solid #000000;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #ff9900;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    @media screen and (max-width: 768px) {
+      nav ul {
+        justify-content: space-around;
+      }
+    
+      nav .search input {
+        width: 100%;
+        margin: 5px 10px 2px 10px;
+      }
+    
+      nav .logout-btn {
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+    
+      main {
+        padding: 15px;
+      }
+    
+      table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 30px auto 0 auto;
+      }
+    
+      th,
+      td {
+        font-size: 14px;
+        padding: 5px;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      nav ul {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        font-size: 10px;
+      }
+    
+      nav ul li {
+        padding: 5px;
+      }
+    
+      nav .search input {
+        width: 1.5cm;
+        margin: 6px auto 2px 0;
+        font-size: 10px;
+      }
+    
+      nav .logout-btn {
+        margin-top: 5px;
+        font-size: 12px;
+        padding: auto auto;
+      }
+    
+      button {
+        padding: 10px 40px;
+        font-size: 15px;
+      }
+    
+      h4 {
+        font-size: 15px;
+      }
+      table {
+        width: 90%;
+        border-collapse: collapse;
+        margin: 20px auto 0 auto;
+      }
+    
+      th,
+      td {
+        font-size: 15px;
+        padding: 0;
+      }
+    }
+  </style>
+
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="student">Home</a>
+        </li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+
+      <div class="search">
+        <input type="text" placeholder="Search here" />
+      </div>
+
+      <div class="logout-btn">
+        <a href="/logout" class="btn btn-success">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Report Card</h1>
+    <div class="rank-total">
+      <h4>Name : {{ queryset.first.student }}</h4>
+      <h4>Department : {{ queryset.first.student.department }}</h4>
+      <h4>Rank : {{ current_rank }}</h4>
+      <h4>Total : {{ total_marks.total_marks }}</h4>
+      <h4>Date of Result : {{ queryset.first.student.studentreportcard.first.date_of_reportcard }}</h4>
+    </div>
+  </main>
+  <table>
+    <thead>
+      <tr>
+        <th>Sr.no.</th>
+        <th>subject_name</th>
+        <th>marks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mark in queryset %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ mark.subject.subject_name }}</td>
+          <td>{{ mark.marks }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

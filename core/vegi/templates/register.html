@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      background-color: rgb(115, 108, 70);
+    }
+    
+    .register-container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 50px;
+      border: 3px solid #000000;
+      background-color: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .alert-container {
+      width: 300px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+    
+    .alert {
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+    
+    input[type='text'],
+    input[type='password'] {
+      width: calc(100% - 22px);
+      padding: 12px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #000000;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: #2fff00;
+      color: rgb(0, 0, 0);
+      padding: 14px;
+      margin-bottom: 8px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+    
+    button:hover {
+      background-color: #00aeff;
+      color: rgb(255, 236, 236);
+      opacity: 0.8;
+    }
+    
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+    
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <div class="register-container">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% if messages %}
+        <div class="alert-container">
+          {{ message.tags }}
+          <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <label><b>Firstname</b></label>
+      <input type="text" placeholder="Enter Firstname" name="first_name" required />
+
+      <label><b>Lastname</b></label>
+      <input type="text" placeholder="Enter Lastname" name="last_name" required />
+
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required />
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required />
+
+      <p>
+        Already have an account? <a href="/login">Login</a>
+      </p>
+
+      <button type="submit"><b>Register</b></button>
+      <label><input type="checkbox" name="agree" />I agree to the terms and conditions</label>
+    </form>
+  </div>
+{% endblock %}

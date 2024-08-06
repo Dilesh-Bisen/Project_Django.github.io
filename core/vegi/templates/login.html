@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      background-color: #d25b80;
+    }
+    
+    .login-container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 50px;
+      border: 3px solid #000000;
+      background-color: #ecf0f1;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .alert-container {
+      width: 300px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+    
+    .alert {
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+    
+    input[type='text'],
+    input[type='password'] {
+      width: calc(100% - 22px);
+      padding: 12px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #000000;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      border-radius: 4px;
+    }
+    
+    button {
+      background-color: green;
+      color: white;
+      padding: 14px;
+      margin-bottom: 8px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+    
+    button:hover {
+      background-color: blue;
+      opacity: 0.8;
+    }
+    
+    span.psw {
+      float: right;
+      padding-top: 16px;
+      color: #3498db;
+    }
+    
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+    
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="login-container">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if messages %}
+          <div class="alert-container">
+            {{ message.tags }}
+            <div class="alert alert-primary" role="alert">
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required />
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required />
+
+        <p>
+          Don't have account <a href="/register">Register</a>
+        </p>
+        <button type="submit">Login</button>
+        <label><input type="checkbox" name="remember" />Remember me</label>
+      </form>
+    </div>
+  </body>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+      font-family: 'Arial', sans-serif;
+      margin: 30;
+      padding: 30;
+      color: #000000;
+    }
+    
+    header {
+      background: linear-gradient(to right, #ff5e62, #ff9966);
+      color: #000000;
+      text-align: center;
+      padding: 1em 0;
+    }
+    
+    nav a {
+      color: #fff;
+      margin-right: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: #ffd700; /* Gold color on hover */
+    }
+    
+    nav a.home,
+    nav a.contact {
+      background-color: #009688;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    nav a.home:hover,
+    nav a.contact:hover {
+      background-color: #4caf50; /* Green color on hover */
+    }
+    
+    section {
+      position: relative;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: justify;
+      color: #000;
+    }
+    
+    h2 {
+      color: #ff5e62;
+      margin-bottom: 15px;
+    }
+    
+    .cta {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .cta a {
+      display: inline-block;
+      background-color: #ff5e62;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .cta a:hover {
+      background-color: #ff9966; /* Lighter shade on hover */
+    }
+  </style>
+
+  <header>
+    <h1>About Us</h1>
+    <nav>
+      <a href="/" class="home">Home</a>
+      <a href="contact" class="contact">Contact</a>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Who We Are</h2>
+    <p>Welcome to our About Us page. We are a passionate team dedicated to providing exceptional services and solutions.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis semper ipsum. Nulla facilisi. Suspendisse potenti.</p>
+
+    <h2>Our Mission</h2>
+    <p>Our mission is to innovate and create valuable experiences for our clients. We strive for excellence in every project we undertake.</p>
+    <p>Curabitur scelerisque elit vel nunc venenatis, nec tincidunt metus posuere. Aliquam vel felis nec purus feugiat fringilla.</p>
+
+    <h2>Values We Uphold</h2>
+    <p>Integrity, collaboration, and creativity are the core values that guide us. We believe in building lasting relationships and delivering outstanding results.</p>
+
+    <div class="cta">
+      <a href="#" class="action-button">Learn More</a>
+    </div>
+  </section>
+{% endblock %}

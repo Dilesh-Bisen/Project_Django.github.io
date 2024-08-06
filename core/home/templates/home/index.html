@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block start %}
+  <style>
+    body {
+      background: linear-gradient(to right, #3494e6, #ec6ead);
+      font-family: 'Arial', sans-serif;
+      margin: 30;
+      padding: 30;
+      color: #000000;
+    }
+    
+    header {
+      background: linear-gradient(to right, #ff4e50, #f9d423);
+      color: #ffffff;
+      text-align: center;
+      padding: 1em 0;
+    }
+    
+    nav a {
+      color: #ff0099;
+      margin-right: 20px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    nav a:hover {
+      color: black;
+    }
+    
+    nav a.about,
+    nav a.contact,
+    nav a.email {
+      background-color: #3cff00;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    nav a.about:hover,
+    nav a.contact:hover,
+    nav a.email:hover {
+      background-color: cyan;
+    }
+    
+    h1,
+    h2,
+    p {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    
+    th,
+    td {
+      border: 3px solid #000000;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    th {
+      background-color: #feda77;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .not-eligible {
+      background-color: #ff2600;
+      color: #fff;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+    
+      to {
+        opacity: 1;
+      }
+    }
+    
+    td {
+      animation: fadeIn 0.8s ease-in-out;
+      transition: background-color 0.3s ease;
+    }
+    
+    tr:hover td {
+      background-color: #ae00ff;
+    }
+  </style>
+
+  <header>
+    <h1>Welcome to Django Template</h1>
+    <nav>
+      <a href="about" class="about">About</a>
+      <a href="contact" class="contact">Contact</a>
+      <a href="{% url 'send_email' %}" class="email">Send Email</a>
+    </nav>
+  </header>
+  <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, aliquam!</h2>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempore mollitia repudiandae? Modi, quaerat quas quisquam a neque tempora dignissimos non quod sequi numquam accusamus quidem, placeat ducimus ex laudantium sed consequatur repellendus eveniet corrupti animi necessitatibus, delectus facere libero possimus? Rem optio fuga blanditiis! Soluta doloribus quo est officia nesciunt fugiat necessitatibus praesentium temporibus? Nesciunt dicta facere dolor provident, delectus officia in culpa accusamus nostrum deserunt. Hic ducimus molestiae fuga qui numquam? Distinctio quae tenetur sint magnam dolores cupiditate nobis asperiores voluptatem quidem? Et harum animi numquam aut odio placeat! Accusantium est necessitatibus in at aut sapiente reprehenderit et.</p>
+  <!-- {{peoples}} -->
+  <table>
+    <tr>
+      <th>Sr. No.</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Can Vote</th>
+    </tr>
+    {% for people in peoples %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ people.name }}</td>
+        <td>{{ people.age }}</td>
+        <td {% if people.age < 18 %} class="not-eligible" {% endif %}>
+        {% if people.age >= 18 %}
+        👍
+        {% else %}
+        👎
+        {% endif %}
+      </td> 
+      </tr>
+    {% endfor %}
+  </table>
+  <p>
+    {{ peoples.0 }}
+    <br />
+    {{ peoples.1 }}
+    <br />
+    {{ peoples.2 }}
+    <br />
+    {{ peoples.3 }}
+    <br />
+  </p>
+  <p>
+    <!-- {{text}} -->
+    {{ text|truncatechars:100 }}
+  </p>
+{% endblock %}
